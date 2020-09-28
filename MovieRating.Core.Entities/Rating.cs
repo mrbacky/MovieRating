@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 
 namespace MovieRating.Core.Entities
@@ -10,6 +11,8 @@ namespace MovieRating.Core.Entities
         public Reviewer Reviewer { get; set; }
 
         public int Grade { get; set; }
+
+        public DateTime Date { get; set; }
 
     }
 }

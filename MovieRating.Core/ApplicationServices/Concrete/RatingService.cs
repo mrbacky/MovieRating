@@ -51,7 +51,7 @@ namespace MovieRating.Core
 
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
-            throw new NotImplementedException();
+            return _ratingRepo.GetNumberOfReviewsFromReviewer(reviewer);
         }
 
         public List<int> GetReviewersByMovie(int movie)
