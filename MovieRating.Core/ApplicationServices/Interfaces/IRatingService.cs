@@ -1,29 +1,52 @@
 ﻿using System.Collections.Generic;
 
-namespace MovieRating.Core {
-    public interface IRatingService {
+namespace MovieRating.Core
+{
+    public interface IRatingService
+    {
 
-        int GetNumberOfReviewsFromReviewer(int reviewer);
 
-        double GetAverageRateFromReviewer(int reviewer);
+        //  Rado
+        public int GetNumberOfReviewsFromReviewer(int reviewer);
 
-        int GetNumberOfRatesByReviewer(int reviewer, int rate);
+        //  Rado
+        public int GetNumberOfReviews(int movie);
 
-        int GetNumberOfReviews(int movie);
+        //  Rado
+        public List<int> GetMoviesWithHighestNumberOfTopRates();
 
-        double GetAverageRateOfMovie(int movie);
+        //  Rado
+        public List<int> GetTopMoviesByReviewer(int reviewer);
 
-        int GetNumberOfRates(int movie, int rate);
 
-        List<int> GetMoviesWithHighestNumberOfTopRates();
 
-        List<int> GetMostProductiveReviewers();
 
-        List<int> GetTopRatedMovies(int amount);
 
-        List<int> GetTopMoviesByReviewer(int reviewer);
+        //  Martin
+        public double GetAverageRateFromReviewer(int reviewer);
 
-        List<int> GetReviewersByMovie(int movie);
+        //  Martin
+        public double GetAverageRateOfMovie(int movie);
+
+        //  Martin
+        public List<int> GetMostProductiveReviewers();
+
+        //  Martin
+        public List<int> GetReviewersByMovie(int movie);
+
+
+
+
+
+
+        //  Houmark
+        public int GetNumberOfRates(int movie, int rate);
+
+        //  Houmark
+        public int GetNumberOfRatesByReviewer(int reviewer, int rate);
+
+        //  Houmark
+        public List<int> GetTopRatedMovies(int amount);
 
 
 

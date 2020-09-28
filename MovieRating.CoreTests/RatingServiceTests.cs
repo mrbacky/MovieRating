@@ -7,6 +7,7 @@ using System.Text;
 namespace MovieRating.Core.Tests {
     [TestClass()]
     public class RatingServiceTests {
+
         [TestMethod()]
         public void GetAverageRateFromReviewerTest() {
             Assert.Fail();

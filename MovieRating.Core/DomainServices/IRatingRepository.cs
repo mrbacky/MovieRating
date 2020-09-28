@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MovieRating.Core.DomainServices
 {
-    interface IRatingRepository
+    public interface IRatingRepository
     {
 
         int GetNumberOfReviewsFromReviewer(int reviewer);
