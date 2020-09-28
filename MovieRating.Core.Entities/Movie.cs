@@ -7,6 +7,7 @@ namespace MovieRating.Core.Entities
         public int Id { get; set; }
 
         public int AvgRating { get; set; }
-        public List<Reviewer> RewiersList { get; set; }
+
+        public List<Reviewer> Reviewers { get; set; }
     }
 }
