@@ -8,6 +8,6 @@ namespace MovieRating.Core.Entities
 
         public int AvgRating { get; set; }
 
-        public List<Reviewer> Reviewers { get; set; }
+        public List<Rating> Ratings { get; set; }
     }
 }

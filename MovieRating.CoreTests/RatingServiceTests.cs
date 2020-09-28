@@ -58,27 +58,27 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetNumberOfReviewsFromReviewerTest()
         {
-            /*
-                        Mock<IRatingRepository> m = new Mock<IRatingRepository>();
 
-                        IRatingService service = new RatingService(m.Object);
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
 
+            IRatingService service = new RatingService(m.Object);
 
-                        IList<Rating> ratings = new List<Rating>
-                        {
-                            new Rating{ Reviewer:175, Movie: 561364, Grade: 4, Date: '2004-11-14' }
-            }
+            List<Rating> r1Ratings = { };
 
-                        Reviewer reviewer1 = new Reviewer
-                        {
+            Movie m1 = new Movie { Id = 1, AvgRating = 3, Reviewers = };
 
-                        }
+            Reviewer re1 = new Reviewer{Id=1,Ratings}
 
 
 
 
-                        service.GetNumberOfReviewsFromReviewer(5);
-            */
+        Rating rating1 = new Rating { }
+
+
+
+
+        service.GetNumberOfReviewsFromReviewer(5);
+
             Assert.Fail();
         }
 
