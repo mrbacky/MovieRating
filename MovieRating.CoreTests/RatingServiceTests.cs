@@ -52,12 +52,89 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetNumberOfReviewsTest()
         {
-            Assert.Fail();
+            //  arrange
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
+
+            IRatingService service = new RatingService(m.Object);
+
+            List<Review> allReviews = new List<Review>();
+
+            Reviewer re1 = new Reviewer { Id = 21 };
+            Reviewer re2 = new Reviewer { Id = 22 };
+            Reviewer re3 = new Reviewer { Id = 23 };
+            Reviewer re4 = new Reviewer { Id = 24 };
+            Reviewer re5 = new Reviewer { Id = 25 };
+
+            Movie m1 = new Movie { Id = 1 };
+            Movie m2 = new Movie { Id = 2 };
+
+            m1.Reviews = new List<Review>();
+            m2.Reviews = new List<Review>();
+
+            Review r1 = new Review()
+            {
+                Date = DateTime.Parse("2004-11-09"),
+                Grade = 2,
+                Movie = m1,
+                Reviewer = re1
+            };
+            Review r2 = new Review()
+            {
+                Date = DateTime.Parse("2005-11-09"),
+                Grade = 5,
+                Movie = m1,
+                Reviewer = re2
+            };
+            Review r3 = new Review()
+            {
+                Date = DateTime.Parse("2006-11-09"),
+                Grade = 3,
+                Movie = m1,
+                Reviewer = re3
+            };
+            Review r4 = new Review()
+            {
+                Date = DateTime.Parse("2006-11-09"),
+                Grade = 3,
+                Movie = m2,
+                Reviewer = re4
+            };
+            Review r5 = new Review()
+            {
+                Date = DateTime.Parse("2006-11-09"),
+                Grade = 1,
+                Movie = m2,
+                Reviewer = re5
+            };
+
+            allReviews.Add(r1);
+            allReviews.Add(r2);
+            allReviews.Add(r3);
+            allReviews.Add(r4);
+            allReviews.Add(r5);
+
+            m1.Reviews.Add(r1);
+            m1.Reviews.Add(r2);
+            m1.Reviews.Add(r3);
+
+            m2.Reviews.Add(r4);
+            m2.Reviews.Add(r5);
+
+            //  act
+            m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
+            int actualResult = service.GetNumberOfReviews(m2.Id);
+            m.Verify(m => m.GetAllReviews(), Times.Once);
+
+            //  assert
+            Assert.IsTrue(actualResult == 2);
+            Assert.IsTrue(m2.Reviews.Count == 2);
+
         }
 
         [TestMethod()]
         public void GetNumberOfReviewsFromReviewerTest()
         {
+            //  arrange
             Mock<IRatingRepository> m = new Mock<IRatingRepository>();
 
             IRatingService service = new RatingService(m.Object);
@@ -126,13 +203,14 @@ namespace MovieRating.Core.Tests
             re2.Reviews.Add(r4);
             re2.Reviews.Add(r5);
 
-
+            //  act
             m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
-
-            int actualResult = service.GetNumberOfReviewsFromReviewer(re1.Id);
+            int actualResult = service.GetNumberOfReviewsFromReviewer(re2.Id);
             m.Verify(m => m.GetAllReviews(), Times.Once);
 
-            Assert.IsTrue(re1.Reviews.Count == 3);
+            //  assert
+            Assert.IsTrue(re2.Reviews.Count == 2);
+            Assert.IsTrue(actualResult == 2);
         }
 
         [TestMethod()]

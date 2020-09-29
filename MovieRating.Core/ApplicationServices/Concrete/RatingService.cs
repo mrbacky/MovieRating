@@ -49,13 +49,14 @@ namespace MovieRating.Core
 
         public int GetNumberOfReviews(int movie)
         {
-            throw new NotImplementedException();
+            int result = _ratingRepo.GetAllReviews().Count(r => r.Movie.Id == movie);
+            return result;
         }
 
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
-            return _ratingRepo.GetAllReviews().Count(r => r.Reviewer.Equals(reviewer));
-            
+            int result = _ratingRepo.GetAllReviews().Count(r => r.Reviewer.Id == reviewer);
+            return result;
         }
 
         public List<int> GetReviewersByMovie(int movie)

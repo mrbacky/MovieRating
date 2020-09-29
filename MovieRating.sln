@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0233EEA6-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B8FD41A8-5573-402D-BBC2-94451D56AC14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRating.Core.Entities", "MovieRating.Core.Entities\MovieRating.Core.Entities.csproj", "{1CEB863F-F760-4BE8-BC3C-E91DE9C4E077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieRating.Core.Entities", "MovieRating.Core.Entities\MovieRating.Core.Entities.csproj", "{1CEB863F-F760-4BE8-BC3C-E91DE9C4E077}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
