@@ -58,28 +58,52 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetNumberOfReviewsFromReviewerTest()
         {
-
             Mock<IRatingRepository> m = new Mock<IRatingRepository>();
 
             IRatingService service = new RatingService(m.Object);
 
-            List<Rating> r1Ratings = { };
+            Reviewer re1 = new Reviewer { Id = 9 };
 
-            Movie m1 = new Movie { Id = 1, AvgRating = 3, Reviewers = };
+            re1.Ratings = new List<Rating>();
 
-            Reviewer re1 = new Reviewer{Id=1,Ratings}
+            Movie m1 = new Movie { Id = 1 };
+            Movie m2 = new Movie { Id = 2 };
 
+            Rating r1 = new Rating()
+            {
+                Date = DateTime.Parse("2004-11-09"),
+                Grade = 2,
+                Movie = m1,
+                Reviewer = re1
+            };
 
+            Rating r2 = new Rating()
+            {
+                Date = DateTime.Parse("2005-11-09"),
+                Grade = 5,
+                Movie = m2,
+                Reviewer = re1
+            };
 
+            Rating r3 = new Rating()
+            {
+                Date = DateTime.Parse("2006-11-09"),
+                Grade = 3,
+                Movie = m2,
+                Reviewer = re1
+            };
 
-        Rating rating1 = new Rating { }
+            m.Setup(m => m.GetNumberOfReviewsFromReviewer(re1.Id)).Returns(() => re1.Ratings.Count);
+            
 
+            re1.Ratings.Add(r1);
+            re1.Ratings.Add(r2);
+            re1.Ratings.Add(r3);
 
+            int actualResult = service.GetNumberOfReviewsFromReviewer(re1.Id);
+            m.Verify(m => m.GetNumberOfReviewsFromReviewer(re1.Id), Times.Once);
 
-
-        service.GetNumberOfReviewsFromReviewer(5);
-
-            Assert.Fail();
+            Assert.IsTrue(re1.Ratings.Count == 3);
         }
 
         [TestMethod()]

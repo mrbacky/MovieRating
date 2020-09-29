@@ -1,4 +1,5 @@
 ﻿using MovieRating.Core.DomainServices;
+using MovieRating.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
