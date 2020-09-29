@@ -6,7 +6,7 @@ namespace MovieRating.Core.Entities
     {
         public int Id { get; set; }
 
-        public List<Rating> Ratings { get; set; }
+        public List<Review> Ratings { get; set; }
 
 
     }

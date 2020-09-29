@@ -54,6 +54,8 @@ namespace MovieRating.Core
 
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
+            //return _ratingRepo.GetAll().FirstOrDefault(r => r.Reviewer.Id == reviewer);
+            
             throw new NotImplementedException();
         }
 

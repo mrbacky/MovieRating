@@ -4,7 +4,7 @@ using System.Dynamic;
 
 namespace MovieRating.Core.Entities
 {
-    public class Rating
+    public class Review
     {
         public Movie Movie { get; set; }
 

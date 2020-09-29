@@ -65,8 +65,8 @@ namespace MovieRating.Core.Tests
             Reviewer re1 = new Reviewer { Id = 9 };
             Reviewer re2 = new Reviewer { Id = 88 };
 
-            List<Rating> allRatings = new List<Rating>();
-            re1.Ratings = new List<Rating>();
+            List<Review> allRatings = new List<Review>();
+            re1.Ratings = new List<Review>();
 
             Movie m1 = new Movie { Id = 1 };
             Movie m2 = new Movie { Id = 2 };
@@ -74,7 +74,7 @@ namespace MovieRating.Core.Tests
             Movie m4 = new Movie { Id = 4 };
             Movie m5 = new Movie { Id = 5 };
 
-            Rating r1 = new Rating()
+            Review r1 = new Review()
             {
                 Date = DateTime.Parse("2004-11-09"),
                 Grade = 2,
@@ -82,7 +82,7 @@ namespace MovieRating.Core.Tests
                 Reviewer = re1
             };
 
-            Rating r2 = new Rating()
+            Review r2 = new Review()
             {
                 Date = DateTime.Parse("2005-11-09"),
                 Grade = 5,
@@ -90,21 +90,21 @@ namespace MovieRating.Core.Tests
                 Reviewer = re1
             };
 
-            Rating r3 = new Rating()
+            Review r3 = new Review()
             {
                 Date = DateTime.Parse("2006-11-09"),
                 Grade = 3,
                 Movie = m3,
                 Reviewer = re1
             };
-            Rating r4 = new Rating()
+            Review r4 = new Review()
             {
                 Date = DateTime.Parse("2006-11-09"),
                 Grade = 3,
                 Movie = m5,
                 Reviewer = re2
             };
-            Rating r5 = new Rating()
+            Review r5 = new Review()
             {
                 Date = DateTime.Parse("2006-11-09"),
                 Grade = 1,
