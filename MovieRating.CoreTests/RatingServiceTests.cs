@@ -65,8 +65,8 @@ namespace MovieRating.Core.Tests
             Reviewer re1 = new Reviewer { Id = 9 };
             Reviewer re2 = new Reviewer { Id = 88 };
 
-            List<Review> allRatings = new List<Review>();
-            re1.Ratings = new List<Review>();
+            List<Review> allReviews = new List<Review>();
+            re1.Reviews = new List<Review>();
 
             Movie m1 = new Movie { Id = 1 };
             Movie m2 = new Movie { Id = 2 };
@@ -112,22 +112,22 @@ namespace MovieRating.Core.Tests
                 Reviewer = re2
             };
 
-            allRatings.Add(r1);
-            allRatings.Add(r2);
-            allRatings.Add(r3);
-            allRatings.Add(r4);
-            allRatings.Add(r5);
+            allReviews.Add(r1);
+            allReviews.Add(r2);
+            allReviews.Add(r3);
+            allReviews.Add(r4);
+            allReviews.Add(r5);
 
-            re1.Ratings.Add(r1);
-            re1.Ratings.Add(r2);
-            re1.Ratings.Add(r3);
+            re1.Reviews.Add(r1);
+            re1.Reviews.Add(r2);
+            re1.Reviews.Add(r3);
 
-            m.Setup(m => m.GetAll()).Returns(() => allRatings);
+            m.Setup(m => m.GetAll()).Returns(() => allReviews);
 
             int actualResult = service.GetNumberOfReviewsFromReviewer(re1.Id);
             m.Verify(m => m.GetAll(), Times.Once);
 
-            Assert.IsTrue(re1.Ratings.Count == 3);
+            Assert.IsTrue(re1.Reviews.Count == 3);
         }
 
         [TestMethod()]
