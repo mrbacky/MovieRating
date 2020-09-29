@@ -67,6 +67,7 @@ namespace MovieRating.Core.Tests
 
             List<Review> allReviews = new List<Review>();
             re1.Reviews = new List<Review>();
+            re2.Reviews = new List<Review>();
 
             Movie m1 = new Movie { Id = 1 };
             Movie m2 = new Movie { Id = 2 };
@@ -121,6 +122,10 @@ namespace MovieRating.Core.Tests
             re1.Reviews.Add(r1);
             re1.Reviews.Add(r2);
             re1.Reviews.Add(r3);
+
+            re2.Reviews.Add(r4);
+            re2.Reviews.Add(r5);
+
 
             m.Setup(m => m.GetAll()).Returns(() => allReviews);
 
