@@ -150,7 +150,57 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetTopRatedMoviesTest()
         {
-            Assert.Fail();
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
+
+            IRatingService service = new RatingService(m.Object);
+
+            List<Movie> movies = new List<Movie>();
+
+
+            Movie m1 = new Movie()
+            {
+                Id = 1,
+
+                Rating = 1.0,
+
+            };
+            Movie m2 = new Movie()
+            {
+                Id = 2,
+
+                Rating = 2.1,
+
+            };
+            Movie m3 = new Movie()
+            {
+                Id = 3,
+
+                Rating = 4.8,
+
+            };
+            Movie m4 = new Movie()
+            {
+                Id = 4,
+
+                Rating = 5.0,
+
+            };
+            Movie m5 = new Movie()
+            {
+                Id = 5,
+
+                Rating = 4.9,
+
+            };
+            Movie m6 = new Movie()
+            {
+                Id = 6,
+
+                Rating = 3.2,
+
+            };
+
         }
     }
+    
 }
