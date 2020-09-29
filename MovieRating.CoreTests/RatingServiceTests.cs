@@ -63,11 +63,16 @@ namespace MovieRating.Core.Tests
             IRatingService service = new RatingService(m.Object);
 
             Reviewer re1 = new Reviewer { Id = 9 };
+            Reviewer re2 = new Reviewer { Id = 88 };
 
+            List<Rating> allRatings = new List<Rating>();
             re1.Ratings = new List<Rating>();
 
             Movie m1 = new Movie { Id = 1 };
             Movie m2 = new Movie { Id = 2 };
+            Movie m3 = new Movie { Id = 3 };
+            Movie m4 = new Movie { Id = 4 };
+            Movie m5 = new Movie { Id = 5 };
 
             Rating r1 = new Rating()
             {
@@ -89,19 +94,38 @@ namespace MovieRating.Core.Tests
             {
                 Date = DateTime.Parse("2006-11-09"),
                 Grade = 3,
-                Movie = m2,
+                Movie = m3,
                 Reviewer = re1
             };
+            Rating r4 = new Rating()
+            {
+                Date = DateTime.Parse("2006-11-09"),
+                Grade = 3,
+                Movie = m5,
+                Reviewer = re2
+            };
+            Rating r5 = new Rating()
+            {
+                Date = DateTime.Parse("2006-11-09"),
+                Grade = 1,
+                Movie = m4,
+                Reviewer = re2
+            };
 
-            m.Setup(m => m.GetNumberOfReviewsFromReviewer(re1.Id)).Returns(() => re1.Ratings.Count);
-            
+            allRatings.Add(r1);
+            allRatings.Add(r2);
+            allRatings.Add(r3);
+            allRatings.Add(r4);
+            allRatings.Add(r5);
 
             re1.Ratings.Add(r1);
             re1.Ratings.Add(r2);
             re1.Ratings.Add(r3);
 
+            m.Setup(m => m.GetAll()).Returns(() => allRatings);
+
             int actualResult = service.GetNumberOfReviewsFromReviewer(re1.Id);
-            m.Verify(m => m.GetNumberOfReviewsFromReviewer(re1.Id), Times.Once);
+            m.Verify(m => m.GetAll(), Times.Once);
 
             Assert.IsTrue(re1.Ratings.Count == 3);
         }

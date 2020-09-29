@@ -3,6 +3,8 @@ using MovieRating.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+
 
 namespace MovieRating.Core
 {
@@ -52,7 +54,7 @@ namespace MovieRating.Core
 
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
-            return _ratingRepo.GetNumberOfReviewsFromReviewer(reviewer);
+            throw new NotImplementedException();
         }
 
         public List<int> GetReviewersByMovie(int movie)
