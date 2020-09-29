@@ -127,10 +127,10 @@ namespace MovieRating.Core.Tests
             re2.Reviews.Add(r5);
 
 
-            m.Setup(m => m.GetAll()).Returns(() => allReviews);
+            m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
 
             int actualResult = service.GetNumberOfReviewsFromReviewer(re1.Id);
-            m.Verify(m => m.GetAll(), Times.Once);
+            m.Verify(m => m.GetAllReviews(), Times.Once);
 
             Assert.IsTrue(re1.Reviews.Count == 3);
         }
