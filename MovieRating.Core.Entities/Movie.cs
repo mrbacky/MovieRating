@@ -8,6 +8,6 @@ namespace MovieRating.Core.Entities
 
         public int Rating { get; set; }
 
-        public List<Review> Ratings { get; set; }
+        public List<Review> Reviews { get; set; }
     }
 }
