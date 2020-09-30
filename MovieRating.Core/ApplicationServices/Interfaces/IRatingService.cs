@@ -5,7 +5,6 @@ namespace MovieRating.Core
     public interface IRatingService
     {
 
-
         //  Rado
         public int GetNumberOfReviewsFromReviewer(int reviewer);
 
@@ -13,6 +12,8 @@ namespace MovieRating.Core
         public int GetNumberOfReviews(int movie);
 
         //  Rado
+        //  Parameter needed or determining if the user wants top x movies with highest number of top grade
+        //  for now it is top 2 movies
         public List<int> GetMoviesWithHighestNumberOfTopRates();
 
         //  Rado
