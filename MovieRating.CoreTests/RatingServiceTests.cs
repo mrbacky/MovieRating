@@ -34,7 +34,59 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetMoviesWithHighestNumberOfTopRatesTest()
         {
-            Assert.Fail();
+            //  arrange   
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
+            IRatingService service = new RatingService(m.Object);
+
+            Reviewer re1 = new Reviewer { Id = 21 };
+            Reviewer re2 = new Reviewer { Id = 22 };
+            Reviewer re3 = new Reviewer { Id = 23 };
+            Reviewer re4 = new Reviewer { Id = 24 };
+
+            Movie m1 = new Movie { Id = 66 };
+            Movie m2 = new Movie { Id = 2 };
+            Movie m3 = new Movie { Id = 3 };
+
+            m1.Reviews = new List<Review>()     //  Rating = 4
+            {
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re1 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re2 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re3 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 1, Movie = m1, Reviewer = re4 }
+            };
+            m2.Reviews = new List<Review>()     //  Rating = 4.5
+            {
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m2, Reviewer = re1 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m2, Reviewer = re2 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m2, Reviewer = re3 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m2, Reviewer = re4 }
+            };
+            m3.Reviews = new List<Review>()     //  Rating = 4.25     
+            {
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m3, Reviewer = re1 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m3, Reviewer = re2 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m3, Reviewer = re3 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m3, Reviewer = re4 }
+            };
+
+            List<Review> allReviews = new List<Review>();
+            allReviews.AddRange(m1.Reviews);
+            allReviews.AddRange(m2.Reviews);
+            allReviews.AddRange(m3.Reviews);
+
+            //  act
+            m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
+            //  returning 2 top movies from all 3 movies
+            List<int> actualResult = service.GetMoviesWithHighestNumberOfTopRates();
+            m.Verify(m => m.GetAllReviews(), Times.Once);
+
+            //  assert
+            Assert.IsTrue(actualResult.Count == 1);
+            Assert.IsTrue(actualResult.Contains(m1.Id));
+
+
+
+
         }
 
         [TestMethod()]
@@ -280,5 +332,5 @@ namespace MovieRating.Core.Tests
 
         }
     }
-    
+
 }

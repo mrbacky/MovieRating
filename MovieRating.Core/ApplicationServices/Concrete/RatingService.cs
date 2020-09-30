@@ -34,7 +34,35 @@ namespace MovieRating.Core
 
         public List<int> GetMoviesWithHighestNumberOfTopRates()
         {
-            throw new NotImplementedException();
+            var allReviews = _ratingRepo.GetAllReviews().ToList();
+
+            int topGrade = 0;
+            foreach (var review in allReviews)
+            {
+                if (review.Grade >= topGrade)
+                    topGrade = review.Grade;
+            }
+
+            var allMovies = new List<Movie>();
+            foreach (var review in allReviews)
+            {
+                if (!allMovies.Contains(review.Movie))
+                    allMovies.Add(review.Movie);
+            }
+
+            var d = new Dictionary<Movie, int>();
+
+            foreach (var movie in allMovies)
+            {
+                d.Add(movie, allReviews.Count(r => r.Grade == topGrade));
+            }
+
+            var topList = new List<int>();
+
+
+            var result = new List<int>();
+
+            return result;
         }
 
         public int GetNumberOfRates(int movie, int rate)

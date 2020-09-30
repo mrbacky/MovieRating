@@ -10,9 +10,9 @@ namespace MovieRating.Core.DomainServices
 
         IEnumerable<Review> GetAllReviews();
 
-        IEnumerable<Movie> GetAllMovies();
+        
 
-        IEnumerable<Reviewer> GetAllReviewers();
+        
 
 
 
