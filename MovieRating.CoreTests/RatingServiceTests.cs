@@ -43,29 +43,29 @@ namespace MovieRating.Core.Tests
             Reviewer re3 = new Reviewer { Id = 23 };
             Reviewer re4 = new Reviewer { Id = 24 };
 
-            Movie m1 = new Movie { Id = 1 };
-            Movie m2 = new Movie { Id = 2 };
-            Movie m3 = new Movie { Id = 3 };
+            Movie m1 = new Movie { Id = 12 };
+            Movie m2 = new Movie { Id = 44 };
+            Movie m3 = new Movie { Id = 9 };
 
-            m1.Reviews = new List<Review>()
+            m1.Reviews = new List<Review>()                     //  rating = 4
             {
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re1 },
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re2 },
-                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m1, Reviewer = re3 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re3 },
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 1, Movie = m1, Reviewer = re4 }
             };
-            m2.Reviews = new List<Review>()
+            m2.Reviews = new List<Review>()                     //  rating = 4.5                      
             {
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m2, Reviewer = re1 },
-                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m2, Reviewer = re2 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m2, Reviewer = re2 },
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m2, Reviewer = re3 },
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m2, Reviewer = re4 }
             };
-            m3.Reviews = new List<Review>()
+            m3.Reviews = new List<Review>()                     //  rating = 4     
             {
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m3, Reviewer = re1 },
-                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m3, Reviewer = re2 },
-                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 4, Movie = m3, Reviewer = re3 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m3, Reviewer = re2 },
+                new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 3, Movie = m3, Reviewer = re3 },
                 new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 3, Movie = m3, Reviewer = re4 }
             };
 
@@ -83,8 +83,7 @@ namespace MovieRating.Core.Tests
             //  assert
             Assert.IsTrue(actualResult.Count == 2);
             Assert.IsTrue(actualResult.Contains(m1.Id));
-            //  problem with border equal values ..........................................................
-            Assert.IsTrue(actualResult.Contains(m2.Id));
+            Assert.IsTrue(actualResult.Contains(m3.Id));
 
 
 
@@ -110,7 +109,6 @@ namespace MovieRating.Core.Tests
         {
             //  arrange
             Mock<IRatingRepository> m = new Mock<IRatingRepository>();
-
             IRatingService service = new RatingService(m.Object);
 
             List<Review> allReviews = new List<Review>();
@@ -127,41 +125,11 @@ namespace MovieRating.Core.Tests
             m1.Reviews = new List<Review>();
             m2.Reviews = new List<Review>();
 
-            Review r1 = new Review()
-            {
-                Date = DateTime.Parse("2004-11-09"),
-                Grade = 2,
-                Movie = m1,
-                Reviewer = re1
-            };
-            Review r2 = new Review()
-            {
-                Date = DateTime.Parse("2005-11-09"),
-                Grade = 5,
-                Movie = m1,
-                Reviewer = re2
-            };
-            Review r3 = new Review()
-            {
-                Date = DateTime.Parse("2006-11-09"),
-                Grade = 3,
-                Movie = m1,
-                Reviewer = re3
-            };
-            Review r4 = new Review()
-            {
-                Date = DateTime.Parse("2006-11-09"),
-                Grade = 3,
-                Movie = m2,
-                Reviewer = re4
-            };
-            Review r5 = new Review()
-            {
-                Date = DateTime.Parse("2006-11-09"),
-                Grade = 1,
-                Movie = m2,
-                Reviewer = re5
-            };
+            Review r1 = new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 2, Movie = m1, Reviewer = re1 };
+            Review r2 = new Review() { Date = DateTime.Parse("2005-11-09"), Grade = 5, Movie = m1, Reviewer = re2 };
+            Review r3 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 3, Movie = m1, Reviewer = re3 };
+            Review r4 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 3, Movie = m2, Reviewer = re4 };
+            Review r5 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 1, Movie = m2, Reviewer = re5 };
 
             allReviews.Add(r1);
             allReviews.Add(r2);
@@ -195,8 +163,8 @@ namespace MovieRating.Core.Tests
 
             IRatingService service = new RatingService(m.Object);
 
-            Reviewer re1 = new Reviewer { Id = 9 };
-            Reviewer re2 = new Reviewer { Id = 88 };
+            Reviewer re1 = new Reviewer { Id = 51 };
+            Reviewer re2 = new Reviewer { Id = 52 };
 
             List<Review> allReviews = new List<Review>();
             re1.Reviews = new List<Review>();
@@ -208,43 +176,11 @@ namespace MovieRating.Core.Tests
             Movie m4 = new Movie { Id = 4 };
             Movie m5 = new Movie { Id = 5 };
 
-            Review r1 = new Review()
-            {
-                Date = DateTime.Parse("2004-11-09"),
-                Grade = 2,
-                Movie = m1,
-                Reviewer = re1
-            };
-
-            Review r2 = new Review()
-            {
-                Date = DateTime.Parse("2005-11-09"),
-                Grade = 5,
-                Movie = m2,
-                Reviewer = re1
-            };
-
-            Review r3 = new Review()
-            {
-                Date = DateTime.Parse("2006-11-09"),
-                Grade = 3,
-                Movie = m3,
-                Reviewer = re1
-            };
-            Review r4 = new Review()
-            {
-                Date = DateTime.Parse("2006-11-09"),
-                Grade = 3,
-                Movie = m5,
-                Reviewer = re2
-            };
-            Review r5 = new Review()
-            {
-                Date = DateTime.Parse("2006-11-09"),
-                Grade = 1,
-                Movie = m4,
-                Reviewer = re2
-            };
+            Review r1 = new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 2, Movie = m1, Reviewer = re1 };
+            Review r2 = new Review() { Date = DateTime.Parse("2005-11-09"), Grade = 5, Movie = m2, Reviewer = re1 };
+            Review r3 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 3, Movie = m3, Reviewer = re1 };
+            Review r4 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 3, Movie = m4, Reviewer = re2 };
+            Review r5 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 1, Movie = m5, Reviewer = re2 };
 
             allReviews.Add(r1);
             allReviews.Add(r2);

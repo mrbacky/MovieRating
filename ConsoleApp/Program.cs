@@ -17,6 +17,7 @@ namespace ConsoleApp
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             var ratingService = serviceProvider.GetRequiredService<IRatingService>();
+            
 
             var topList = ratingService.GetMoviesWithHighestNumberOfTopRates();
 

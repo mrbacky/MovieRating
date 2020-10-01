@@ -9,5 +9,7 @@ namespace MovieRating.Core.Entities
         public double Rating { get; set; }
 
         public List<Review> Reviews { get; set; }
+
+        public int TopGradeCount { get; set; }
     }
 }
