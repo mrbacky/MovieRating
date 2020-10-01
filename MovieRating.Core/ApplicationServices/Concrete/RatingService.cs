@@ -38,7 +38,7 @@ namespace MovieRating.Core
             int topGrade = 0;
             //  looking up the top grade
             foreach (var review in allReviews)
-                if (review.Grade >= topGrade)
+                if (review.Grade > topGrade)
                     topGrade = review.Grade;
 
             var allMovies = new List<Movie>();

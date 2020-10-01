@@ -28,18 +28,18 @@ namespace ConsoleApp
             Movie m3 = new Movie { Id = 2 };
 
             //                                                                  rating = 4
-            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-01"), Grade = 5, Movie = m1, Reviewer = re1 });
-            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-02"), Grade = 5, Movie = m1, Reviewer = re2 });
-            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-03"), Grade = 5, Movie = m1, Reviewer = re3 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-01"), Grade = 4, Movie = m1, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-02"), Grade = 4, Movie = m1, Reviewer = re2 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-03"), Grade = 4, Movie = m1, Reviewer = re3 });
             allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-04"), Grade = 1, Movie = m1, Reviewer = re4 });
             //                                                                  rating = 4.5
-            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-10"), Grade = 5, Movie = m2, Reviewer = re1 });
-            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-11"), Grade = 5, Movie = m2, Reviewer = re2 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-10"), Grade = 4, Movie = m2, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-11"), Grade = 4, Movie = m2, Reviewer = re2 });
             allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-12"), Grade = 2, Movie = m2, Reviewer = re3 });
             allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-29"), Grade = 2, Movie = m2, Reviewer = re4 });
             //                                                                  rating = 4.25
-            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-20"), Grade = 5, Movie = m3, Reviewer = re1 });
-            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-21"), Grade = 5, Movie = m3, Reviewer = re2 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-20"), Grade = 4, Movie = m3, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-21"), Grade = 4, Movie = m3, Reviewer = re2 });
             allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-22"), Grade = 4, Movie = m3, Reviewer = re3 });
             allReviews.Add(new Review() { Date = DateTime.Parse("2004-11-23"), Grade = 1, Movie = m3, Reviewer = re4 });
         }
