@@ -45,7 +45,7 @@ namespace MovieRating.Core.Tests
             re2.Reviews.Add(r5);
 
             m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
-            double actualResult = service.GetAverageRateFromReviewer(21);
+            double actualResult = service.GetAverageRateFromReviewer(re1.Id);
 
             m.Verify(m => m.GetAllReviews(), Times.Once);
 
@@ -103,6 +103,10 @@ namespace MovieRating.Core.Tests
             };
 
             List<Review> allReviews = new List<Review>();
+
+            allReviews.AddRange(m1.Reviews);
+            allReviews.AddRange(m2.Reviews);
+            allReviews.AddRange(m3.Reviews);
 
 
             //  act
