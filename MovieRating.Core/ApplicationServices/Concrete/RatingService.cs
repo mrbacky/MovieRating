@@ -2,6 +2,7 @@
 using MovieRating.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Linq;
 
@@ -18,8 +19,9 @@ namespace MovieRating.Core
         }
 
         public double GetAverageRateFromReviewer(int reviewer)
-        {
-            throw new NotImplementedException();
+        { var s = from r in _ratingRepo.GetAllReviews().Where(r => r.Reviewer.Id == reviewer)
+                select r.Grade;
+            return s.Average(r => r);
         }
 
         public double GetAverageRateOfMovie(int movie)
