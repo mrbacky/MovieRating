@@ -19,7 +19,7 @@ namespace ConsoleApp
             var ratingService = serviceProvider.GetRequiredService<IRatingService>();
             
 
-            var topList = ratingService.GetMoviesWithHighestNumberOfTopRates();
+            var topList = ratingService.GetTopMoviesByReviewer(23);
 
             Console.WriteLine("END");
             

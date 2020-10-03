@@ -19,8 +19,9 @@ namespace MovieRating.Core
         }
 
         public double GetAverageRateFromReviewer(int reviewer)
-        { var s = from r in _ratingRepo.GetAllReviews().Where(r => r.Reviewer.Id == reviewer)
-                select r.Grade;
+        {
+            var s = from r in _ratingRepo.GetAllReviews().Where(r => r.Reviewer.Id == reviewer)
+                    select r.Grade;
             return s.Average(r => r);
         }
 
@@ -61,26 +62,6 @@ namespace MovieRating.Core
 
 
             return idsOfTopMovies;
-            /*
-            var dict = new Dictionary<Movie, int>();
-            if (!dict.ContainsKey(movie))
-                dict.Add(movie, allReviews.Where(r => r.Grade == topGrade && r.Movie == movie).Count());
-
-            var d = dict.ToList();
-
-            //  sorting movies by number of top grades DESC
-            d.Sort((a, b) => b.Value.CompareTo(a.Value));
-
-
-            //  there is no other parameter to decide which movie will be the last one 
-            //  in top 2 movies list when the 3rd movie has the same number of top grades as a movie above
-            var top2Movies = d.GetRange(0, 2);
-
-            //  populating int list with movie id's
-            var idsOfTopMovies = new List<int>();
-            foreach (var item in top2Movies)
-            idsOfTopMovies.Add(item.Key.Id);
-            */
 
         }
 
@@ -113,7 +94,19 @@ namespace MovieRating.Core
 
         public List<int> GetTopMoviesByReviewer(int reviewer)
         {
-            throw new NotImplementedException();
+            var allReviews = _ratingRepo.GetAllReviews().ToList();
+
+            var reviewersReviews = allReviews.Where(r => r.Reviewer.Id == reviewer)
+                .OrderByDescending(r => r.Grade)
+                .ThenByDescending(r => r.Date)
+                .ThenBy(r => r.Movie.Id);
+
+            var idsList = new List<int>();
+
+            foreach (var review in reviewersReviews)
+                idsList.Add(review.Movie.Id);
+
+            return idsList;
         }
 
         public List<int> GetTopRatedMovies(int amount)

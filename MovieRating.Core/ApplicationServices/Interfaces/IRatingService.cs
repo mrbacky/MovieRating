@@ -16,7 +16,12 @@ namespace MovieRating.Core
         //  for now it is top 2 movies
         public List<int> GetMoviesWithHighestNumberOfTopRates();
 
-        //  Rado
+        /*  Rado
+         *  Reviewer can rate more movies with the same grade on the same day, so we have to sort reviews 
+         *  not only by rate and date but by something specific  
+         */
+
+        
         public List<int> GetTopMoviesByReviewer(int reviewer);
 
 

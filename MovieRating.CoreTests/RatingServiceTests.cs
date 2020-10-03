@@ -5,6 +5,7 @@ using MovieRating.Core.DomainServices;
 using MovieRating.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MovieRating.Core.Tests
@@ -249,7 +250,57 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetTopMoviesByReviewerTest()
         {
-            Assert.Fail();
+            //  arrange
+
+            var m = new Mock<IRatingRepository>();
+            var service = new RatingService(m.Object);
+
+            var allReviews = new List<Review>();
+
+            var re1 = new Reviewer { Id = 21 };
+            var re2 = new Reviewer { Id = 22 };
+            var re3 = new Reviewer { Id = 23 };
+
+            var m1 = new Movie { Id = 1 };
+            var m2 = new Movie { Id = 2 };
+            var m3 = new Movie { Id = 3 };
+            var m4 = new Movie { Id = 4 };
+            var m5 = new Movie { Id = 5 };
+            var m6 = new Movie { Id = 6 };
+            var m7 = new Movie { Id = 7 };
+
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-01"), Grade = 5, Movie = m1, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-06"), Grade = 5, Movie = m2, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-13"), Grade = 4, Movie = m3, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-02"), Grade = 4, Movie = m4, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-01"), Grade = 3, Movie = m5, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-01"), Grade = 3, Movie = m6, Reviewer = re1 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-10"), Grade = 3, Movie = m7, Reviewer = re1 });
+
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-01"), Grade = 5, Movie = m1, Reviewer = re2 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-09"), Grade = 4, Movie = m2, Reviewer = re2 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-01"), Grade = 4, Movie = m3, Reviewer = re2 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-05"), Grade = 1, Movie = m4, Reviewer = re2 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-08"), Grade = 1, Movie = m5, Reviewer = re2 });
+
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-12"), Grade = 5, Movie = m4, Reviewer = re3 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-11"), Grade = 4, Movie = m3, Reviewer = re3 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-09"), Grade = 4, Movie = m5, Reviewer = re3 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-01"), Grade = 3, Movie = m2, Reviewer = re3 });
+            allReviews.Add(new Review() { Date = DateTime.Parse("2004-09-01"), Grade = 3, Movie = m1, Reviewer = re3 });
+
+            //  act
+            m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
+            List<int> actualResult = service.GetTopMoviesByReviewer(re3.Id);
+            m.Verify(m => m.GetAllReviews(), Times.Once);
+
+            Assert.IsTrue(actualResult.ElementAt(0) == 4);
+            Assert.IsTrue(actualResult.ElementAt(1) == 3);
+            Assert.IsTrue(actualResult.ElementAt(2) == 5);
+            Assert.IsTrue(actualResult.ElementAt(3) == 1);
+            Assert.IsTrue(actualResult.ElementAt(4) == 2);
+
+
         }
 
         [TestMethod()]
