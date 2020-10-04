@@ -20,14 +20,24 @@ namespace MovieRating.Core
 
         public double GetAverageRateFromReviewer(int reviewer)
         {
-            var s = from r in _ratingRepo.GetAllReviews().Where(r => r.Reviewer.Id == reviewer)
-                    select r.Grade;
-            return s.Average(r => r);
+            var s = _ratingRepo.GetAllReviews().Where(r => r.Reviewer.Id == reviewer);
+            double sum = 0;
+            foreach (Review b in s)
+            {
+                sum += b.Grade;
+            }
+            return sum / s.Count();
         }
 
         public double GetAverageRateOfMovie(int movie)
         {
-            throw new NotImplementedException();
+            var s = _ratingRepo.GetAllReviews().Where(r => r.Movie.Id == movie);
+            double sum = 0;
+            foreach (Review b in s)
+            {
+                sum += b.Grade;
+            }
+            return sum / s.Count();
         }
 
         public List<int> GetMostProductiveReviewers()

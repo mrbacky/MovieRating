@@ -19,44 +19,45 @@ namespace MovieRating.Core.Tests
         {
             Mock<IRatingRepository> m = new Mock<IRatingRepository>();
             IRatingService service = new RatingService(m.Object);
-
-            List<Review> allReviews = new List<Review>();
-
             Reviewer re1 = new Reviewer { Id = 21 };
-            Reviewer re2 = new Reviewer { Id = 15 };
+            Movie m1 = new Movie { Id = 12 };
 
-            Movie m1 = new Movie { Id = 11 };
-
-            Review r1 = new Review() { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re1 };
-            Review r2 = new Review() { Date = DateTime.Parse("2005-11-09"), Grade = 4, Movie = m1, Reviewer = re1 };
-            Review r3 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 3, Movie = m1, Reviewer = re1 };
-            Review r4 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 3, Movie = m1, Reviewer = re2 };
-            Review r5 = new Review() { Date = DateTime.Parse("2006-11-09"), Grade = 1, Movie = m1, Reviewer = re2 };
-
-            allReviews.Add(r1);
-            allReviews.Add(r2);
-            allReviews.Add(r3);
-            allReviews.Add(r4);
-            allReviews.Add(r5);
-
-            re1.Reviews.Add(r1);
-            re1.Reviews.Add(r2);
-            re1.Reviews.Add(r3);
-            re2.Reviews.Add(r4);
-            re2.Reviews.Add(r5);
+            List<Review> allReviews = new List<Review>
+            {
+                new Review { Date = DateTime.Parse("2004-11-09"), Grade = 5, Movie = m1, Reviewer = re1 },
+                new Review {Date = DateTime.Parse("2005-11-09"), Grade = 4, Movie = m1, Reviewer = re1  },
+                new Review {Date = DateTime.Parse("2006-11-09"), Grade = 3, Movie = m1, Reviewer = re1 },
+            };
 
             m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
             double actualResult = service.GetAverageRateFromReviewer(re1.Id);
-
             m.Verify(m => m.GetAllReviews(), Times.Once);
-
             Assert.IsTrue(actualResult == 4);
         }
 
         [TestMethod()]
         public void GetAverageRateOfMovieTest()
         {
-            Assert.Fail();
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
+            IRatingService service = new RatingService(m.Object);
+            Reviewer re1 = new Reviewer { Id = 12 };
+            Movie m1 = new Movie { Id = 20 };
+            Movie m2 = new Movie {Id = 15};
+
+            List<Review> allReviews = new List<Review>
+            {
+                new Review { Date = DateTime.Parse("2004-11-09"), Grade = 3, Movie = m1, Reviewer = re1 },
+                new Review {Date = DateTime.Parse("2005-11-09"), Grade = 4, Movie = m1, Reviewer = re1  },
+                new Review {Date = DateTime.Parse("2006-11-09"), Grade = 2, Movie = m1, Reviewer = re1 },
+                new Review { Date = DateTime.Parse("2004-11-09"), Grade = 3, Movie = m1, Reviewer = re1 },
+                new Review {Date = DateTime.Parse("2005-11-09"), Grade = 5, Movie = m2, Reviewer = re1  },
+                new Review {Date = DateTime.Parse("2006-11-09"), Grade = 2, Movie = m2, Reviewer = re1 }
+            };
+
+            m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
+            double actualResult = service.GetAverageRateOfMovie(m1.Id);
+            m.Verify(m => m.GetAllReviews(), Times.Once);
+            Assert.IsTrue(actualResult ==3);
         }
 
         [TestMethod()]
