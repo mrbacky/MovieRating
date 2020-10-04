@@ -42,7 +42,25 @@ namespace MovieRating.Core
 
         public List<int> GetMostProductiveReviewers()
         {
-            throw new NotImplementedException();
+            var list = _ratingRepo.GetAllReviews();
+            SortedList<int, int> list2 = new SortedList<int, int>();
+            foreach (Review b in list)
+            {
+                if (!list2.ContainsKey(b.Reviewer.Id))
+                {
+                    int d = GetNumberOfReviewsFromReviewer(b.Reviewer.Id);
+                    list2.Add(b.Reviewer.Id, d);
+                }
+            }
+
+
+            var list3 = list2.OrderByDescending(r => r.Value).ToList();
+            List<int> idlist = new List<int>();
+            foreach (var v in list3)
+            {
+                idlist.Add(v.Key);
+            }
+            return idlist;
         }
 
         public List<int> GetMoviesWithHighestNumberOfTopRates()
