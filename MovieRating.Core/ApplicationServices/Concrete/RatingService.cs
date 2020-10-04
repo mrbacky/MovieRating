@@ -122,14 +122,14 @@ namespace MovieRating.Core
         {
             var list = _ratingRepo.GetAllReviews().Where(x => x.Movie.Id == movie);
 
-            var AllReviewList = list.OrderByDescending(x => x.Grade).ThenByDescending(x => x.Date);
+            var allReviewList = list.OrderByDescending(x => x.Grade).ThenByDescending(x => x.Date);
 
-            List<int> Reviewerlist = new List<int>();
-            foreach (var v in AllReviewList)
+            List<int> reviewerlist = new List<int>();
+            foreach (var v in allReviewList)
             {
-                Reviewerlist.Add(v.Movie.Id);
+                reviewerlist.Add(v.Movie.Id);
             }
-            return Reviewerlist;
+            return reviewerlist;
         }
 
         public List<int> GetTopMoviesByReviewer(int reviewer)

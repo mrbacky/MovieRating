@@ -270,6 +270,7 @@ namespace MovieRating.Core.Tests
         {
             Mock<IRatingRepository> m = new Mock<IRatingRepository>();
             IRatingService service = new RatingService(m.Object);
+
             Reviewer re1 = new Reviewer { Id = 12 };
             Reviewer re2 = new Reviewer { Id = 15 };
             Reviewer re3 = new Reviewer { Id = 13 };
