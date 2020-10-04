@@ -268,7 +268,30 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetReviewersByMovieTest()
         {
-            Assert.Fail();
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
+            IRatingService service = new RatingService(m.Object);
+            Reviewer re1 = new Reviewer { Id = 12 };
+            Reviewer re2 = new Reviewer { Id = 15 };
+            Reviewer re3 = new Reviewer { Id = 13 };
+            Movie m1 = new Movie { Id = 20 };
+            Movie m2 = new Movie { Id = 15 };
+
+            List<Review> allReviews = new List<Review>
+            {
+                new Review { Date = DateTime.Parse("2004-11-09"), Grade = 3, Movie = m1, Reviewer = re3 },
+                new Review {Date = DateTime.Parse("2005-11-09"), Grade = 4, Movie = m1, Reviewer = re2  },
+                new Review {Date = DateTime.Parse("2006-11-09"), Grade = 2, Movie = m1, Reviewer = re2 },
+                new Review { Date = DateTime.Parse("2004-11-09"), Grade = 3, Movie = m1, Reviewer = re1 },
+                new Review {Date = DateTime.Parse("2005-11-09"), Grade = 5, Movie = m2, Reviewer = re2  },
+                new Review {Date = DateTime.Parse("2006-11-09"), Grade = 2, Movie = m2, Reviewer = re1 }
+            };
+
+            m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
+            List<int> actualResult = service.GetReviewersByMovie(m1.Id);
+
+            Assert.IsTrue(actualResult.Count == 3);
+            Assert.IsTrue(actualResult[0] == allReviews[2].Movie.Id);
+            Assert.IsTrue(actualResult[1] == allReviews[4].Movie.Id);
         }
 
         [TestMethod()]

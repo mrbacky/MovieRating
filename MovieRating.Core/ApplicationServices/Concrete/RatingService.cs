@@ -43,7 +43,9 @@ namespace MovieRating.Core
         public List<int> GetMostProductiveReviewers()
         {
             var list = _ratingRepo.GetAllReviews();
+
             SortedList<int, int> list2 = new SortedList<int, int>();
+
             foreach (Review b in list)
             {
                 if (!list2.ContainsKey(b.Reviewer.Id))
@@ -53,9 +55,10 @@ namespace MovieRating.Core
                 }
             }
 
-
             var list3 = list2.OrderByDescending(r => r.Value).ToList();
+
             List<int> idlist = new List<int>();
+
             foreach (var v in list3)
             {
                 idlist.Add(v.Key);
@@ -117,7 +120,16 @@ namespace MovieRating.Core
 
         public List<int> GetReviewersByMovie(int movie)
         {
-            throw new NotImplementedException();
+            var list = _ratingRepo.GetAllReviews().Where(x => x.Movie.Id == movie);
+
+            var AllReviewList = list.OrderByDescending(x => x.Grade).ThenByDescending(x => x.Date);
+
+            List<int> Reviewerlist = new List<int>();
+            foreach (var v in AllReviewList)
+            {
+                Reviewerlist.Add(v.Movie.Id);
+            }
+            return Reviewerlist;
         }
 
         public List<int> GetTopMoviesByReviewer(int reviewer)
