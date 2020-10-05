@@ -10,9 +10,16 @@ namespace MovieRating.Core.DomainServices
 
         IEnumerable<Review> GetAllReviews();
 
-        
+        //Dictionary<int, Reviewer> GetAllReviewers();
 
-        
+        //Dictionary<int, Movie> GetAllMovies();
+
+        //Dictionary<int, JSONReview> GetAllJSONReviews();
+
+
+
+
+
 
 
 

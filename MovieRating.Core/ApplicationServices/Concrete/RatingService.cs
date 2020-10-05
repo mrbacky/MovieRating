@@ -20,50 +20,19 @@ namespace MovieRating.Core
 
         public double GetAverageRateFromReviewer(int reviewer)
         {
-            var s = _ratingRepo.GetAllReviews().Where(r => r.Reviewer.Id == reviewer);
-            double sum = 0;
-            foreach (Review b in s)
-            {
-                sum += b.Grade;
-            }
-            return sum / s.Count();
+            var s = from r in _ratingRepo.GetAllReviews().Where(r => r.Reviewer.Id == reviewer)
+                    select r.Grade;
+            return s.Average(r => r);
         }
 
         public double GetAverageRateOfMovie(int movie)
         {
-            var s = _ratingRepo.GetAllReviews().Where(r => r.Movie.Id == movie);
-            double sum = 0;
-            foreach (Review b in s)
-            {
-                sum += b.Grade;
-            }
-            return sum / s.Count();
+            throw new NotImplementedException();
         }
 
         public List<int> GetMostProductiveReviewers()
         {
-            var list = _ratingRepo.GetAllReviews();
-
-            SortedList<int, int> list2 = new SortedList<int, int>();
-
-            foreach (Review b in list)
-            {
-                if (!list2.ContainsKey(b.Reviewer.Id))
-                {
-                    int d = GetNumberOfReviewsFromReviewer(b.Reviewer.Id);
-                    list2.Add(b.Reviewer.Id, d);
-                }
-            }
-
-            var list3 = list2.OrderByDescending(r => r.Value).ToList();
-
-            List<int> idlist = new List<int>();
-
-            foreach (var v in list3)
-            {
-                idlist.Add(v.Key);
-            }
-            return idlist;
+            throw new NotImplementedException();
         }
 
         public List<int> GetMoviesWithHighestNumberOfTopRates()
@@ -120,16 +89,7 @@ namespace MovieRating.Core
 
         public List<int> GetReviewersByMovie(int movie)
         {
-            var list = _ratingRepo.GetAllReviews().Where(x => x.Movie.Id == movie);
-
-            var allReviewList = list.OrderByDescending(x => x.Grade).ThenByDescending(x => x.Date);
-
-            List<int> reviewerlist = new List<int>();
-            foreach (var v in allReviewList)
-            {
-                reviewerlist.Add(v.Movie.Id);
-            }
-            return reviewerlist;
+            throw new NotImplementedException();
         }
 
         public List<int> GetTopMoviesByReviewer(int reviewer)
