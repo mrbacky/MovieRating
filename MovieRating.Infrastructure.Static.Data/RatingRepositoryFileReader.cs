@@ -3,8 +3,7 @@ using System.IO;
 using System.Text.Json;
 using MovieRating.Core.DomainServices;
 using MovieRating.Core.Entities;
-using newtonsoft 
-
+using Newtonsoft.Json;
 namespace ConsoleApp
 {
     public class RatingRepositoryFileReader : IRatingRepository
@@ -18,7 +17,7 @@ namespace ConsoleApp
 
         private IEnumerable<Review> _ratingCollection;
 
-        public IEnumerable<Review> GetAll()
+        public IEnumerable<Review> GetAllReviews()
         {
             return _ratingCollection;
         }
@@ -29,14 +28,14 @@ namespace ConsoleApp
             using (JsonTextReader reader = new JsonTextReader(streamReader))
             {
                 reader.CloseInput = true;
-                var serializer = new JsonSerializer();
-                var ratings = new List<BERating>();
+                var serializer = new Newtonsoft.Json.JsonSerializer();
+                var ratings = new List<Review>();
 
                 while (reader.Read())
                 {
                     if (reader.TokenType == JsonToken.StartObject)
                     {
-                        BERating review = serializer.Deserialize<BERating>(reader);
+                        Review review = serializer.Deserialize<Review>(reader);
                         ratings.Add(review);
                     }
 
@@ -45,5 +44,4 @@ namespace ConsoleApp
             }
         }
     }
-}
 }
