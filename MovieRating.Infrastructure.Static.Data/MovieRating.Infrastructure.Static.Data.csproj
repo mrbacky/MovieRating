@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MovieRating.Core.Entities\MovieRating.Core.Entities.csproj" />
     <ProjectReference Include="..\MovieRating.Core\MovieRating.Core.csproj" />
   </ItemGroup>
