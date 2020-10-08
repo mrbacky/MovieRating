@@ -7,15 +7,7 @@ namespace MovieRating.Core.DomainServices
 {
     public interface IRatingRepository
     {
-
         IEnumerable<Review> GetAllReviews();
-
-        
-
-        
-
-
-
 
     }
 }

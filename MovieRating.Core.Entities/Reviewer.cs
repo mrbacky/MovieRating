@@ -4,10 +4,10 @@ namespace MovieRating.Core.Entities
 {
     public class Reviewer
     {
-        public int Id { get; set; }
-
-        public List<Review> Reviews { get; set; }
-
-
+        public class BEReviewer
+        {
+            public int Id;
+            public List<Review> _ratingRepo;
+        }
     }
 }

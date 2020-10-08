@@ -12,7 +12,6 @@ namespace ConsoleApp
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IRatingService, RatingService>();
-            serviceCollection.AddScoped<IRatingRepository, RatingRepository>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
