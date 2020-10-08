@@ -9,9 +9,6 @@ namespace MovieRating.Core.DomainServices
     {
         IEnumerable<Review> GetAllReviews();
 
-<<<<<<< Updated upstream
-=======
-        IEnumerable<Movie> AllMovies();
->>>>>>> Stashed changes
+
     }
 }
