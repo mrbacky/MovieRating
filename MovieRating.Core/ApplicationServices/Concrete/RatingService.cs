@@ -42,28 +42,11 @@ namespace MovieRating.Core
 
         public List<int> GetMostProductiveReviewers()
         {
-            var list = _ratingRepo.GetAllReviews();
-
-            SortedList<int, int> list2 = new SortedList<int, int>();
-
-            foreach (Review b in list)
-            {
-                if (!list2.ContainsKey(b.Reviewer))
-                {
-                    int d = GetNumberOfReviewsFromReviewer(b.Reviewer);
-                    list2.Add(b.Reviewer, d);
-                }
-            }
-
-            var list3 = list2.OrderByDescending(r => r.Value).ToList();
-
-            List<int> idlist = new List<int>();
-
-            foreach (var v in list3)
-            {
-                idlist.Add(v.Key);
-            }
-            return idlist;
+            return _ratingRepo.GetAllReviews()
+                .GroupBy(p => p.Reviewer)
+                .OrderByDescending(p => p.Count())
+                .Select(p => p.Key)
+                .ToList();
         }
 
         public List<int> GetMoviesWithHighestNumberOfTopRates()
@@ -85,8 +68,6 @@ namespace MovieRating.Core
                 throw new ArgumentException("The rate has to be within the range 1-5.");
             else
                 return _ratingRepo.GetAllReviews().Count(p => p.Movie == movie && p.Grade == rate);
-
-           
 
         }
 
