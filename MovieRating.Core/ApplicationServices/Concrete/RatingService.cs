@@ -51,7 +51,6 @@ namespace MovieRating.Core
 
         public List<int> GetMoviesWithHighestNumberOfTopRates()
         {
-
             return _ratingRepo.GetAllReviews()
                 .OrderByDescending(p => GetNumberOfRates(p.Movie, 5))
                 .Select(p => p.Movie)
@@ -125,15 +124,11 @@ namespace MovieRating.Core
 
         public List<int> GetTopRatedMovies(int amount)
         {
-            throw new NotImplementedException();
-
-            /*
-             var AllMovies = _ratingRepo.AllMovies().ToList();
-
-             var TopMovies = AllMovies.Sort(Rating);
-
-             return TopMovies;
-            */
+            return _ratingRepo.GetAllReviews()
+                .OrderByDescending(p => GetAverageRateOfMovie(p.Movie))
+                .Select(p => p.Movie)
+                .Take(amount)
+                .ToList();
         }
     }
 }
