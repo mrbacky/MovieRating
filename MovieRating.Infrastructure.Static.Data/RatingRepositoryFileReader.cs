@@ -8,7 +8,7 @@ namespace ConsoleApp
 {
     public class RatingRepositoryFileReader : IRatingRepository
     {
-        private readonly string _path = "ratings.json";
+        private readonly string _path = "ratings.json" ;
 
         public RatingRepositoryFileReader()
         {

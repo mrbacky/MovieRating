@@ -6,9 +6,9 @@ namespace MovieRating.Core.Entities
 {
     public class Review
     {
-        public Movie Movie { get; set; }
+        public int Movie { get; set; }
 
-        public Reviewer Reviewer { get; set; }
+        public int Reviewer { get; set; }
 
         public int Grade { get; set; }
 
