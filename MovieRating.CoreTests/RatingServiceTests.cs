@@ -155,13 +155,65 @@ namespace MovieRating.Core.Tests
         [TestMethod()]
         public void GetNumberOfRatesTest()
         {
-            Assert.Fail();
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
+            IRatingService service = new RatingService(m.Object);
+
+            Movie m1 = new Movie { Id = 1 };
+            Movie m2 = new Movie { Id = 2 };
+            Movie m3 = new Movie { Id = 3 };
+
+            m1.Reviews = new List<Review>()                    
+            {
+                new Review() { Movie = m1},
+                new Review() { Movie = m1},
+                new Review() { Movie = m1},
+                new Review() { Movie = m2}
+            };
+            m2.Reviews = new List<Review>()                                         
+            {
+                new Review() { Movie = m1},
+                new Review() { Movie = m1},
+                new Review() { Movie = m2},
+                new Review() { Movie = m2}
+            };
+            m3.Reviews = new List<Review>()                       
+            {
+                new Review() { Movie = m1},
+                new Review() { Movie = m2},
+                new Review() { Movie = m3},
+                new Review() { Movie = m3}
+            };
+            /*
+            m.Setup(m => m.GetAllReviews()).Returns(() => allReviews);
+           
+            List<int> actualResult = service.GetNumberOfRates();
+            m.Verify(m => m.GetAllReviews(), Times.Once);
+            */
+
+            
+           
         }
 
         [TestMethod()]
         public void GetNumberOfRatesByReviewerTest()
         {
-            Assert.Fail();
+            
+            Mock<IRatingRepository> m = new Mock<IRatingRepository>();
+            IRatingService service = new RatingService(m.Object);
+
+            Reviewer re1 = new Reviewer { Id = 1 };
+            Reviewer re2 = new Reviewer { Id = 2 };
+
+
+            Review r1 = new Review() { Reviewer = re1 };
+            Review r2 = new Review() { Reviewer = re1 };
+            Review r3 = new Review() { Reviewer = re2 };
+            Review r4 = new Review() { Reviewer = re2 };
+            Review r5 = new Review() { Reviewer = re2 };
+
+
+
+
         }
 
         [TestMethod()]
@@ -403,6 +455,21 @@ namespace MovieRating.Core.Tests
                 Rating = 3.2,
 
             };
+
+            movies.Add(m4);
+            movies.Add(m5);
+            movies.Add(m3);
+
+            /*
+            m.Setup(m => m.GetAllMovies()).Returns(() => allMovies);
+            List<int> actualResult = service.;
+            m.Verify(m => m.GetAllMovies(), Times.Once);
+
+            Assert.IsTrue(actualResult.ElementAt(0) == m4);
+            Assert.IsTrue(actualResult.ElementAt(1) == m5);
+            Assert.IsTrue(actualResult.ElementAt(2) == m3);
+            */
+
 
         }
     }

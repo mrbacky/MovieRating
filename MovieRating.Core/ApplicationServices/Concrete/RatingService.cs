@@ -78,12 +78,18 @@ namespace MovieRating.Core
 
         public int GetNumberOfRates(int movie, int rate)
         {
+<<<<<<< Updated upstream
             if (movie < 1)
                 throw new ArgumentException("The id of the movie has to be larger than 0.");
             if (!(rate > 0 && rate < 6))
                 throw new ArgumentException("The rate has to be within the range 1-5.");
             else
                 return _ratingRepo.GetAllReviews().Count(p => p.Movie == movie && p.Grade == rate);
+=======
+            throw new NotImplementedException();
+            // int movie = _ratingRepo.GetAllReviews().Count(r => r.Movie.Id == movie);
+
+>>>>>>> Stashed changes
         }
 
         public int GetNumberOfRatesByReviewer(int reviewer, int rate)
@@ -138,6 +144,14 @@ namespace MovieRating.Core
         public List<int> GetTopRatedMovies(int amount)
         {
             throw new NotImplementedException();
+
+            /*
+             var AllMovies = _ratingRepo.AllMovies().ToList();
+
+             var TopMovies = AllMovies.Sort(Rating);
+
+             return TopMovies;
+            */
         }
     }
 }
