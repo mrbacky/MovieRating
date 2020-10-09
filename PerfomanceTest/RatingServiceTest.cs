@@ -22,6 +22,9 @@ namespace MSTest
                 new Review {Reviewer = 1, Movie = 1, Grade = 2},
                 new Review {Reviewer = 1, Movie = 2, Grade = 5},
                 new Review {Reviewer = 2, Movie = 1, Grade = 1},
+                new Review {Reviewer = 1, Movie = 2, Grade = 2},
+                new Review {Reviewer = 2, Movie = 2, Grade = 4},
+                new Review {Reviewer = 3, Movie = 1, Grade = 1}
             };
 
             m.Setup(m => m.GetAllReviews()).Returns(() => returnValue);
@@ -32,7 +35,7 @@ namespace MSTest
 
             m.Verify(m => m.GetAllReviews(), Times.Once);
 
-            Assert.IsTrue(actualResult == 2);
+            Assert.IsTrue(actualResult == 3);
         }
 
         [TestMethod]
