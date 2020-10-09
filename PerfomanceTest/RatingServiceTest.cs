@@ -282,7 +282,7 @@ namespace MSTest
             Review[] returnValue =
             {
                 new Review {Reviewer = 1, Movie = 1, Grade = 4, Date = DateTime.Parse("2020-03-11")},
-                new Review {Reviewer = 1, Movie = 2, Grade = 5, Date = DateTime.Parse("2002-03-12")},
+                new Review {Reviewer = 1, Movie = 2, Grade = 5, Date = DateTime.Parse("2020-03-12")},
                 new Review {Reviewer = 1, Movie = 3, Grade = 4, Date = DateTime.Parse("2020-03-12")},
 
                 new Review {Reviewer = 2, Movie = 1, Grade = 4, Date = DateTime.Parse("2020-03-12")},
@@ -297,7 +297,7 @@ namespace MSTest
             var ratingService = new RatingService(m.Object);
             var actualResult = ratingService.GetReviewersByMovie(1);
             m.Verify(m => m.GetAllReviews(), Times.Once);
-            var expectedResult = new List<int>() { 112, 111 };
+            var expectedResult = new List<int>() { 2, 1 };
 
             Assert.IsTrue(actualResult.SequenceEqual(expectedResult));
 
